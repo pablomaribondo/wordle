@@ -7,23 +7,40 @@ const useWordle = (solution) => {
   const [history, setHistory] = useState([]); // each guess is a string
   const [isCorrect, setIsCorrect] = useState(false);
 
-  const formatGuess = () => {};
+  const formatGuess = () => {
+    console.log("formatting the guess - ", currentGuess);
+  };
 
   const addNewGuess = () => {};
 
   const handleKeyup = ({ key }) => {
+    if (key === "Enter") {
+      if (turn > 5) {
+        console.log("you used all your guesses");
+        return;
+      }
+
+      if (history.includes(currentGuess)) {
+        console.log("you already tried that word");
+        return;
+      }
+
+      if (currentGuess.length !== 5) {
+        console.log("word must be 5 chars long");
+        return;
+      }
+
+      formatGuess();
+    }
+
     if (key === "Backspace") {
-      setCurrentGuess((previous) => {
-        return previous.slice(0, -1);
-      });
+      setCurrentGuess((previous) => previous.slice(0, -1));
       return;
     }
 
     if (/^[A-Za-z]$/.test(key)) {
       if (currentGuess.length < 5) {
-        setCurrentGuess((previous) => {
-          return previous + key;
-        });
+        setCurrentGuess((previous) => previous + key);
       }
     }
   };
