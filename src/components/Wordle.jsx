@@ -17,10 +17,5 @@ export default function Wordle({ solution }) {
     console.log(guesses, turn, isCorrect);
   }, [guesses, turn, isCorrect]);
 
-  return (
-    <div>
-      <div>current guess - {currentGuess}</div>
-      <Grid currentGuess={currentGuess} guesses={guesses} turn={turn} />
-    </div>
-  );
+  return <Grid currentGuess={currentGuess} guesses={guesses} turn={turn} />;
 }

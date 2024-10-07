@@ -1,4 +1,4 @@
-export default function Row({ guess }) {
+export default function Row({ guess, currentGuess }) {
   if (guess) {
     return (
       <div className="row past">
@@ -10,13 +10,31 @@ export default function Row({ guess }) {
       </div>
     );
   }
+
+  if (currentGuess) {
+    const letters = currentGuess.split('');
+
+    return (
+      <div className="row current">
+        {letters.map((letter, index) => (
+          <div key={index} className="filled">
+            {letter}
+          </div>
+        ))}
+        {[...Array(5 - letters.length)].map((_, index) => (
+          <div key={index} />
+        ))}
+      </div>
+    );
+  }
+
   return (
     <div className="row">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
+      <div />
+      <div />
+      <div />
+      <div />
+      <div />
     </div>
   );
 }
